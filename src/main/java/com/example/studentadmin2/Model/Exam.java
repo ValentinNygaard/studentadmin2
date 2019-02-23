@@ -1,15 +1,20 @@
 package com.example.studentadmin2.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Exam {
 
+    @Id
     private int exam_id;
     private String exam_title;
-    private String exam_place;
+    private String exam_type;
 
-    public Exam(int exam_id, String exam_title, String exam_place) {
+    public Exam(int exam_id, String exam_title, String exam_type) {
         this.exam_id = exam_id;
         this.exam_title = exam_title;
-        this.exam_place = exam_place;
+        this.exam_type = exam_type;
     }
 
     public Exam() {}
@@ -30,11 +35,11 @@ public class Exam {
         this.exam_title = exam_title;
     }
 
-    public String getExam_place() {
-        return exam_place;
+    public String getExam_type() {
+        return exam_type;
     }
 
-    public void setExam_place(String exam_place) {
-        this.exam_place = exam_place;
+    public void setExam_place(String exam_type) {
+        this.exam_type = exam_type;
     }
 }

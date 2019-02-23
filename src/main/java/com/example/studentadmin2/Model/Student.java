@@ -1,7 +1,12 @@
 package com.example.studentadmin2.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Student {
 
+    @Id
     private int student_id;
     private String student_name;
 
