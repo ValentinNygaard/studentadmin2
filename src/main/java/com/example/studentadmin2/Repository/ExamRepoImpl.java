@@ -38,7 +38,7 @@ public class ExamRepoImpl implements IRepo<Exam> {
 
     @Override
     public Exam update(Exam exam) {
-        String sql = "UPDATE exam SET exam_name=?, WHERE exam_id=?";
+        String sql = "UPDATE exam SET exam_name=? WHERE exam_id=?";
         template.update(sql,exam.getExam_title(), exam.getExam_id());
         return exam;
     }
@@ -49,4 +49,9 @@ public class ExamRepoImpl implements IRepo<Exam> {
         return template.update(sql, id) >= 0;
     }
 
+    public List<Exam> searchByName(String exam_title) {
+        String sql ="SELECT * FROM exam WHERE exam_title LIKE ?";
+        RowMapper<Exam> rowMapper = new BeanPropertyRowMapper<>(Exam.class);
+        return template.query(sql, rowMapper, exam_title);
+    }
 }

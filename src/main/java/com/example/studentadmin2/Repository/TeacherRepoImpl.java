@@ -38,7 +38,7 @@ public class TeacherRepoImpl implements IRepo<Teacher> {
 
     @Override
     public Teacher update(Teacher teacher) {
-        String sql = "UPDATE teacher SET name=?, WHERE student_id=?";
+        String sql = "UPDATE teacher SET teacher_name=? WHERE teacher_id=?";
         template.update(sql,teacher.getTeacher_name(), teacher.getTeacher_id());
         return teacher;
     }
@@ -47,6 +47,12 @@ public class TeacherRepoImpl implements IRepo<Teacher> {
     public boolean delete(int id) {
         String sql = "DELETE FROM teacher WHERE teacher_id=?";
         return template.update(sql, id) >= 0;
+    }
+
+    public List<Teacher> searchByName(String teacher_name) {
+        String sql ="SELECT * FROM teacher WHERE teacher_name LIKE ?";
+        RowMapper<Teacher> rowMapper = new BeanPropertyRowMapper<>(Teacher.class);
+        return template.query(sql, rowMapper, teacher_name);
     }
 
 }

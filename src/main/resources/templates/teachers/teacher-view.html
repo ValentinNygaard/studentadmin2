@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Students</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-grid.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+</head>
+<body>
+
+<div class="topnav">
+    <a href="/">StudentAdmin</a>
+    <a href="/students">Studerende</a>
+    <a href="/cources">Kurser</a>
+    <a href="/exercises">Opgaver</a>
+    <a href="/exams">Eksamener</a>
+    <a class="active" href="/teachers">Undervisere</a>
+</div>
+
+<div class="container" style="padding-left:0px">
+    <div class="row">
+        <div class="col">
+
+            <h1>Undervisere</h1>
+
+            <h2>- Se og rediger</h2>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Stamoplysninger</h3>
+
+                <p>Navn: <span th:text="${teacher.teacher_name}"></span></p>
+            </div>
+
+            <p>&nbsp</p>
+
+
+
+        </div>
+
+        <div class="col">
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Rediger stamoplysninger</h3>
+                <form action="/updateTeacher" method="post">
+                    Navn:<br>
+                    <input type="hidden" name="teacher_id" size="30" th:value="${teacher.teacher_id}">
+                    <input type="text" name="teacher_name" size="30" th:value="${teacher.teacher_name}"><br>&nbsp<br>
+                    <input type="submit" value="Opdater">
+                </form>
+            </div>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3 style="color: darkred">Slet denne underviser fra systemet</h3>
+                <form action="/deleteTeacher" method="post">
+                    <input type="hidden" name="teacher_id" size="30" th:value="${teacher.teacher_id}">
+                    <input type="hidden" name="teacher_name" size="30" th:value="${teacher.teacher_name}">
+                    <input type="submit" value="Slet">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

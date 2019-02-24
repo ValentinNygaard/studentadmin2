@@ -36,4 +36,7 @@ public class ExamServiceImpl implements IService<Exam> {
     @Override
     public boolean delete(int id) { return repoImpl.delete(id); }
 
+    public List<Exam> searchByName(String exam_title) { return repoImpl.searchByName(exam_title); }
+
+
 }

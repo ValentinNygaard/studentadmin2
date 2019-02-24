@@ -35,4 +35,6 @@ public class ExerciseServiceImpl implements IService<Exercise> {
     @Override
     public boolean delete(int id) { return repoImpl.delete(id); }
 
+    public List<Exercise> searchByName(String exercise_title) { return repoImpl.searchByName(exercise_title); }
+
 }

@@ -38,7 +38,7 @@ public class ExerciseRepoImpl implements IRepo<Exercise> {
 
     @Override
     public Exercise update(Exercise exercise) {
-        String sql = "UPDATE exercise SET exercise_name=?, WHERE exercise_id=?";
+        String sql = "UPDATE exercise SET exercise_name=? WHERE exercise_id=?";
         template.update(sql,exercise.getExercise_title(), exercise.getExercise_id());
         return exercise;
     }
@@ -47,6 +47,12 @@ public class ExerciseRepoImpl implements IRepo<Exercise> {
     public boolean delete(int id) {
         String sql = "DELETE FROM exercise WHERE exercise_id=?";
         return template.update(sql, id) >= 0;
+    }
+
+    public List<Exercise> searchByName(String exercise_title) {
+        String sql ="SELECT * FROM exercise WHERE exercise_title LIKE ?";
+        RowMapper<Exercise> rowMapper = new BeanPropertyRowMapper<>(Exercise.class);
+        return template.query(sql, rowMapper, exercise_title);
     }
 
 }

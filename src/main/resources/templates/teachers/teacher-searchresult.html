@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Students</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-grid.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+</head>
+<body>
+
+<div class="topnav">
+    <a href="/">StudentAdmin</a>
+    <a class="active" href="/students">Studerende</a>
+    <a href="/cources">Kurser</a>
+    <a href="/exercises">Opgaver</a>
+    <a href="/exams">Eksamener</a>
+    <a href="/teachers">Undervisere</a>
+</div>
+
+
+
+<div class="container" style="padding-left:0px">
+    <div class="row">
+        <div class="col">
+
+            <h1>Undervisere</h1>
+
+            <h2>- Oprettelse, søgning og oversigt</h2>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Opret ny underviser</h3>
+                <form action="/createTeacher" method="post">
+                    <input type="text" name="teacher_name" size="30" placeholder="Navn">
+                    <input type="submit" value="Opret">
+                </form>
+            </div>
+
+            <p>&nbsp</p>
+
+        </div>
+
+        <div class="col">
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Søg efter underviser</h3>
+                <form action="/searchTeacher" method="post">
+                    <input type="text" name="teacher_name" size="30" placeholder="Navn">
+                    <input type="submit" value="Søg">
+                </form>
+
+                <p>&nbsp</p>
+
+                <h3>Søgeresultat - undervisere</h3>
+
+                <p>- Klik på navn for at se og redigere en studerende</p>
+
+                <span th:each="teacher :${searchResult}">
+                <a class="link1" th:href="@{'/teacher-view/' + ${teacher.teacher_id}}"><span th:text="${teacher.teacher_name}">Name</span></a><br>
+                </span>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

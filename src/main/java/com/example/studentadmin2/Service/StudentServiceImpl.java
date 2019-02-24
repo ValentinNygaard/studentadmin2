@@ -35,4 +35,6 @@ public class StudentServiceImpl implements IService<Student> {
     @Override
     public boolean delete(int id) { return repoImpl.delete(id); }
 
+    public List<Student> searchByName(String student_name) { return repoImpl.searchByName(student_name); }
+
 }
