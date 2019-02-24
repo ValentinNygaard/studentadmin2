@@ -18,63 +18,63 @@ public class ExerciseController {
 
 
     @Autowired
-    ExerciseServiceImpl exerciceService;
+    ExerciseServiceImpl exerciseService;
 
     private List<Exercise> searchResult;
-    private List<Exercise> exerciceList;
+    private List<Exercise> exerciseList;
 
-    @GetMapping("/exercices")
-    public String exercice(Model model){
-        exerciceList = exerciceService.findAll();
-        model.addAttribute("exerciceList", exerciceList);
-        return "exercices/exercices";
+    @GetMapping("/exercises")
+    public String exercise(Model model){
+        exerciseList = exerciseService.findAll();
+        model.addAttribute("exerciseList", exerciseList);
+        return "exercises/exercises";
     }
 
     @PostMapping("/createExercise")
-    public String createExercise(@ModelAttribute Exercise exercice){
-        exerciceService.create(exercice);
-        return "redirect:/exercices";
+    public String createExercise(@ModelAttribute Exercise exercise){
+        exerciseService.create(exercise);
+        return "redirect:/exercises";
     }
 
     @PostMapping("/searchExercise")
-    public String searchExercise(@ModelAttribute Exercise exercice){
-        searchResult = exerciceService.searchByName(exercice.getExercise_title());
+    public String searchExercise(@ModelAttribute Exercise exercise){
+        searchResult = exerciseService.searchByName(exercise.getExercise_title());
         if (searchResult.size()==0) {
-            return "redirect:/exercice-nosearchresult";
+            return "redirect:/exercise-nosearchresult";
         }
-        return "redirect:/exercice-searchresult";
+        return "redirect:/exercise-searchresult";
     }
 
-    @GetMapping("/exercice-searchresult")
+    @GetMapping("/exercise-searchresult")
     public String exerciseSearchResult(Model model){
         model.addAttribute("searchResult", searchResult);
-        return "exercices/exercice-searchresult";
+        return "exercises/exercise-searchresult";
     }
 
-    @GetMapping("/exercice-nosearchresult")
-    public String exerciceNoResult(Model model){
-        exerciceList = exerciceService.findAll();
-        model.addAttribute("exerciceList", exerciceList);
-        return "exercices/exercice-nosearchresult";
+    @GetMapping("/exercise-nosearchresult")
+    public String exerciseNoResult(Model model){
+        exerciseList = exerciseService.findAll();
+        model.addAttribute("exerciseList", exerciseList);
+        return "exercises/exercise-nosearchresult";
     }
 
-    @GetMapping("/exercice-view/{id}")
-    public String exerciceView(@PathVariable("id") int id, Model model) {
-        Exercise exercice = exerciceService.findById(id);
-        model.addAttribute("exercice", exercice);
-        return "exercices/exercice-view";
+    @GetMapping("/exercise-view/{id}")
+    public String exerciseView(@PathVariable("id") int id, Model model) {
+        Exercise exercise = exerciseService.findById(id);
+        model.addAttribute("exercise", exercise);
+        return "exercises/exercise-view";
     }
 
     @PostMapping("/updateExercise")
-    public String updateExercise(@ModelAttribute Exercise exercice){
-        exerciceService.update(exercice);
-        return "redirect:/exercice-view/"+exercice.getExercise_id();
+    public String updateExercise(@ModelAttribute Exercise exercise){
+        exerciseService.update(exercise);
+        return "redirect:/exercise-view/"+exercise.getExercise_id();
     }
 
     @PostMapping("/deleteExercise")
-    public String deleteExercise(@ModelAttribute Exercise exercice){
-        exerciceService.delete(exercice.getExercise_id());
-        return "redirect:/exercices";
+    public String deleteExercise(@ModelAttribute Exercise exercise){
+        exerciseService.delete(exercise.getExercise_id());
+        return "redirect:/exercises";
     }
 
 }

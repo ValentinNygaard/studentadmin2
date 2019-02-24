@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Studerende</title>
+    <title>Opgaver</title>
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-grid.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
 </head>
@@ -10,9 +10,9 @@
 
 <div class="topnav">
     <a href="/">StudentAdmin</a>
-    <a class="active" href="/students">Studerende</a>
+    <a href="/students">Studerende</a>
     <a href="/courses">Kurser</a>
-    <a href="/exercises">Opgaver</a>
+    <a class="active" href="/exercises">Opgaver</a>
     <a href="/exams">Eksamener</a>
     <a href="/teachers">Undervisere</a>
 </div>
@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col">
 
-            <h1>Studerende</h1>
+            <h1>Opgaver</h1>
 
             <h2>- Se og rediger</h2>
 
@@ -31,7 +31,7 @@
 
                 <h3>Stamoplysninger</h3>
 
-                 <p>Navn: <span th:text="${student.student_name}"></span></p>
+                 <p>Navn: <span th:text="${exercise.exercise_title}"></span></p>
             </div>
 
             <p>&nbsp</p>
@@ -47,10 +47,10 @@
             <div class="box1">
 
                 <h3>Rediger stamoplysninger</h3>
-                <form action="/updateStudent" method="post">
+                <form action="/updateExercise" method="post">
                     Navn:<br>
-                    <input type="hidden" name="student_id" size="30" th:value="${student.student_id}">
-                    <input type="text" name="student_name" size="30" th:value="${student.student_name}"><br>&nbsp<br>
+                    <input type="hidden" name="exercise_id" size="30" th:value="${exercise.exercise_id}">
+                    <input type="text" name="exercise_title" size="30" th:value="${exercise.exercise_title}"><br>&nbsp<br>
                     <input type="submit" value="Opdater">
                 </form>
             </div>
@@ -59,10 +59,10 @@
 
             <div class="box1">
 
-                <h3 style="color: darkred">Slet denne studerende fra systemet</h3>
-                <form action="/deleteStudent" method="post">
-                    <input type="hidden" name="student_id" size="30" th:value="${student.student_id}">
-                    <input type="hidden" name="student_name" size="30" th:value="${student.student_name}">
+                <h3 style="color: darkred">Slet denne opgave fra systemet</h3>
+                <form action="/deleteExercise" method="post">
+                    <input type="hidden" name="exercise_id" size="30" th:value="${exercise.exercise_id}">
+                    <input type="hidden" name="exercise_title" size="30" th:value="${exercise.exercise_title}">
                     <input type="submit" value="Slet">
                 </form>
             </div>

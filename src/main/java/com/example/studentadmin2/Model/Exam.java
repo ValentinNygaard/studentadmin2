@@ -39,7 +39,7 @@ public class Exam {
         return exam_type;
     }
 
-    public void setExam_place(String exam_type) {
+    public void setExam_type(String exam_type) {
         this.exam_type = exam_type;
     }
 }

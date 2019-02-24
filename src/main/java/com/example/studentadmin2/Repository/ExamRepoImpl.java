@@ -31,15 +31,15 @@ public class ExamRepoImpl implements IRepo<Exam> {
 
     @Override
     public Exam create(Exam exam) {
-        String sql = "INSERT INTO exam (exam_id, exam_name) VALUES(?,?)";
-        template.update(sql, exam.getExam_id(), exam.getExam_title());
+        String sql = "INSERT INTO exam (exam_id, exam_title, exam_type) VALUES(?,?,?)";
+        template.update(sql, exam.getExam_id(), exam.getExam_title(), exam.getExam_type());
         return exam;
     }
 
     @Override
     public Exam update(Exam exam) {
-        String sql = "UPDATE exam SET exam_name=? WHERE exam_id=?";
-        template.update(sql,exam.getExam_title(), exam.getExam_id());
+        String sql = "UPDATE exam SET exam_title=?, exam_type=? WHERE exam_id=?";
+        template.update(sql,exam.getExam_title(), exam.getExam_type(), exam.getExam_id());
         return exam;
     }
 

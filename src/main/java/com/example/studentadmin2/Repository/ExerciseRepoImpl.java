@@ -31,14 +31,14 @@ public class ExerciseRepoImpl implements IRepo<Exercise> {
 
     @Override
     public Exercise create(Exercise exercise) {
-        String sql = "INSERT INTO exercise (exercise_id, exercise_name) VALUES(?,?)";
+        String sql = "INSERT INTO exercise (exercise_id, exercise_title) VALUES(?,?)";
         template.update(sql, exercise.getExercise_id(), exercise.getExercise_title());
         return exercise;
     }
 
     @Override
     public Exercise update(Exercise exercise) {
-        String sql = "UPDATE exercise SET exercise_name=? WHERE exercise_id=?";
+        String sql = "UPDATE exercise SET exercise_title=? WHERE exercise_id=?";
         template.update(sql,exercise.getExercise_title(), exercise.getExercise_id());
         return exercise;
     }

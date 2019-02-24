@@ -31,14 +31,14 @@ public class CourseRepoImpl implements IRepo<Course> {
 
     @Override
     public Course create(Course course) {
-        String sql = "INSERT INTO course (course_id, course_name) VALUES(?,?)";
+        String sql = "INSERT INTO course (course_id, course_title) VALUES(?,?)";
         template.update(sql, course.getCourse_id(), course.getCourse_title());
         return course;
     }
 
     @Override
     public Course update(Course course) {
-        String sql = "UPDATE course SET course_name=?, WHERE course_id=?";
+        String sql = "UPDATE course SET course_title=? WHERE course_id=?";
         template.update(sql,course.getCourse_title(), course.getCourse_id());
         return course;
     }

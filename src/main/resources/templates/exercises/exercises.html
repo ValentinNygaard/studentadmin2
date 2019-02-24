@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Studerende</title>
+    <title>Opgaver</title>
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-grid.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
 </head>
@@ -10,9 +10,9 @@
 
 <div class="topnav">
     <a href="/">StudentAdmin</a>
-    <a class="active" href="/students">Studerende</a>
+    <a href="/students">Studerende</a>
     <a href="/courses">Kurser</a>
-    <a href="/exercises">Opgaver</a>
+    <a class="active" href="/exercises">Opgaver</a>
     <a href="/exams">Eksamener</a>
     <a href="/teachers">Undervisere</a>
 </div>
@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col">
 
-            <h1>Studerende</h1>
+            <h1>Opgaver</h1>
 
             <h2>- Oprettelse, søgning og oversigt</h2>
 
@@ -31,9 +31,9 @@
 
             <div class="box1">
 
-                <h3>Opret ny studerende</h3>
-                <form action="/createStudent" method="post">
-                    <input type="text" name="student_name" size="30" placeholder="Navn">
+                <h3>Opret ny opgave</h3>
+                <form action="/createExercise" method="post">
+                    <input type="text" name="exercise_title" size="30" placeholder="Navn">
                     <input type="submit" value="Opret">
                 </form>
             </div>
@@ -48,23 +48,27 @@
 
             <div class="box1">
 
-                <h3>Søg efter studerende</h3>
-                <form action="/searchStudent" method="post">
-                    <input type="text" name="student_name" size="30" placeholder="Navn">
+                <h3>Søg efter opgave</h3>
+                <form action="/searchExercise" method="post">
+                    <input type="text" name="exercise_title" size="30" placeholder="Navn">
                     <input type="submit" value="Søg">
                 </form>
 
-                <p>&nbsp</p>
-
-                <h3>Søgeresultat - studerende</h3>
-
-                <p>- Klik på navn for at se og redigere en studerende</p>
-
-                <span th:each="student :${searchResult}">
-                <a class="link1" th:href="@{'/student-view/' + ${student.student_id}}"><span th:text="${student.student_name}">Name</span></a><br>
-                </span>
-
             </div>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Liste over alle opgaver</h3>
+
+                <p>- Klik på navn for at se og redigere en opgave</p>
+
+                <span th:each="exercise :${exerciseList}">
+                <a class="link1" th:href="@{'/exercise-view/' + ${exercise.exercise_id}}"><span th:text="${exercise.exercise_title}">Name</span></a><br>
+                </span>
+            </div>
+
 
         </div>
     </div>

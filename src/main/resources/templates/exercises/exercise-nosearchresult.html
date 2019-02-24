@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Eksamener</title>
+    <title>Opgaver</title>
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap-grid.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
 </head>
@@ -12,8 +12,8 @@
     <a href="/">StudentAdmin</a>
     <a href="/students">Studerende</a>
     <a href="/courses">Kurser</a>
-    <a href="/exercises">Opgaver</a>
-    <a class="active" href="/exams">Eksamener</a>
+    <a class="active" href="/exercises">Opgaver</a>
+    <a href="/exams">Eksamener</a>
     <a href="/teachers">Undervisere</a>
 </div>
 
@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col">
 
-            <h1>Eksamener</h1>
+            <h1>Opgaver</h1>
 
             <h2>- Oprettelse, søgning og oversigt</h2>
 
@@ -31,10 +31,9 @@
 
             <div class="box1">
 
-                <h3>Opret ny eksamen</h3>
-                <form action="/createExam" method="post">
-                    <input type="text" name="exam_title" size="30" placeholder="Navn"><br>
-                    <input type="text" name="exam_type" size="30" placeholder="Type"><br>
+                <h3>Opret ny opgave</h3>
+                <form action="/createExercise" method="post">
+                    <input type="text" name="exercise_title" size="30" placeholder="Navn">
                     <input type="submit" value="Opret">
                 </form>
             </div>
@@ -49,11 +48,15 @@
 
             <div class="box1">
 
-                <h3>Søg efter eksamener</h3>
-                <form action="/searchExam" method="post">
-                    <input type="text" name="exam_title" size="30" placeholder="Navn">
+                <h3>Søg efter opgave</h3>
+                <form action="/searchExercise" method="post">
+                    <input type="text" name="exercise_title" size="30" placeholder="Navn">
                     <input type="submit" value="Søg">
                 </form>
+
+                <h3 style="color: darkred">Ingen match fundet!</h3>
+
+                <p>- Prøv at søge igen eller kig i oversigtslisten nedenfor</p>
 
             </div>
 
@@ -61,15 +64,15 @@
 
             <div class="box1">
 
-                <h3>Liste over alle eksamener</h3>
+                <h3>Liste over alle opgaver</h3>
 
-                <p>- Klik på navn for at se og redigere en eksamen</p>
+                <p>- Klik på navn for at se og redigere en opgave</p>
 
-                <span th:each="exam :${examList}">
-                <a class="link1" th:href="@{'/exam-view/' + ${exam.exam_id}}"><span th:text="${exam.exam_title}">Name</span></a><br>
+                <span th:each="exercise :${exerciseList}">
+                <a class="link1" th:href="@{'/exercise-view/' + ${exercise.exercise_id}}"><span th:text="${exercise.exercise_title}">Name</span></a><br>
                 </span>
-            </div>
 
+            </div>
 
         </div>
     </div>
