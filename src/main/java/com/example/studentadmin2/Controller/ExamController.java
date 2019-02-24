@@ -46,7 +46,7 @@ public class ExamController {
     }
 
     @GetMapping("/exam-searchresult")
-    public String ExamSearchResult(Model model){
+    public String examSearchResult(Model model){
         model.addAttribute("searchResult", searchResult);
         return "exams/exam-searchresult";
     }
@@ -68,7 +68,7 @@ public class ExamController {
     @PostMapping("/updateExam")
     public String updateExam(@ModelAttribute Exam exam){
         examService.update(exam);
-        return "redirect:/student-view/"+exam.getExam_id();
+        return "redirect:/exam-view/"+exam.getExam_id();
     }
 
     @PostMapping("/deleteExam")
