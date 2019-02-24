@@ -1,8 +1,6 @@
 package com.example.studentadmin2.Controller;
 
-import com.example.studentadmin2.Model.Exam;
 import com.example.studentadmin2.Model.Exercise;
-import com.example.studentadmin2.Service.ExamServiceImpl;
 import com.example.studentadmin2.Service.ExerciseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
