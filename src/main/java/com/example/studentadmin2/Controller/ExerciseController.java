@@ -1,6 +1,8 @@
 package com.example.studentadmin2.Controller;
 
+import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exercise;
+import com.example.studentadmin2.Service.CourseServiceImpl;
 import com.example.studentadmin2.Service.ExerciseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +22,12 @@ public class ExerciseController {
     @Autowired
     ExerciseServiceImpl exerciseService;
 
+    @Autowired
+    CourseServiceImpl courseService;
+
     private List<Exercise> searchResult;
     private List<Exercise> exerciseList;
+    private int currentExercise;
 
     @GetMapping("/exercises")
     public String exercise(Model model){
@@ -61,8 +67,25 @@ public class ExerciseController {
     @GetMapping("/exercise-view/{id}")
     public String exerciseView(@PathVariable("id") int id, Model model) {
         Exercise exercise = exerciseService.findById(id);
+        currentExercise = exercise.getExercise_id();
+        List<Course> coursesWithExercise = courseService.coursesWithExercise(id);
+        List<Course> coursesWithoutExercise = courseService.coursesWithoutExercise(id);
         model.addAttribute("exercise", exercise);
+        model.addAttribute("coursesWithExercise", coursesWithExercise);
+        model.addAttribute("coursesWithoutExercise", coursesWithoutExercise);
         return "exercises/exercise-view";
+    }
+
+    @GetMapping("/exercise-addcourse/{id}")
+    public String exerciseAddCourse(@PathVariable("id") int id) {
+        courseService.exerciseAddCourse(currentExercise, id);
+        return "redirect:/exercise-view/"+currentExercise;
+    }
+
+    @GetMapping("/exercise-deletecourse/{id}")
+    public String exerciseDeleteCourse(@PathVariable("id") int id) {
+        courseService.exerciseDeleteCourse(currentExercise, id);
+        return "redirect:/exercise-view/"+currentExercise;
     }
 
     @PostMapping("/updateExercise")

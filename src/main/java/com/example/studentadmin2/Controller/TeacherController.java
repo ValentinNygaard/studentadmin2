@@ -1,6 +1,8 @@
 package com.example.studentadmin2.Controller;
 
+import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Teacher;
+import com.example.studentadmin2.Service.CourseServiceImpl;
 import com.example.studentadmin2.Service.TeacherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +22,12 @@ public class TeacherController {
     @Autowired
     TeacherServiceImpl teacherService;
 
+    @Autowired
+    CourseServiceImpl courseService;
+
     private List<Teacher> searchResult;
     private List<Teacher> teacherList;
+    private int currentTeacher;
 
     @GetMapping("/teachers")
     public String teachers(Model model){
@@ -59,11 +65,29 @@ public class TeacherController {
     }
 
     @GetMapping("/teacher-view/{id}")
-    public String view(@PathVariable("id") int id, Model model) {
+    public String teacherView(@PathVariable("id") int id, Model model) {
         Teacher teacher = teacherService.findById(id);
+        currentTeacher = teacher.getTeacher_id();
+        List<Course> coursesWithTeacher = courseService.coursesWithTeacher(id);
+        List<Course> coursesWithoutTeacher = courseService.coursesWithoutTeacher(id);
         model.addAttribute("teacher", teacher);
+        model.addAttribute("coursesWithTeacher", coursesWithTeacher);
+        model.addAttribute("coursesWithoutTeacher", coursesWithoutTeacher);
         return "teachers/teacher-view";
     }
+
+    @GetMapping("/teacher-addcourse/{id}")
+    public String teacherAddCourse(@PathVariable("id") int id) {
+        courseService.teacherAddCourse(currentTeacher, id);
+        return "redirect:/teacher-view/"+currentTeacher;
+    }
+
+    @GetMapping("/teacher-deletecourse/{id}")
+    public String teacherDeleteCourse(@PathVariable("id") int id) {
+        courseService.teacherDeleteCourse(currentTeacher, id);
+        return "redirect:/teacher-view/"+currentTeacher;
+    }
+
 
     @PostMapping("/updateTeacher")
     public String updateTeacher(@ModelAttribute Teacher teacher){

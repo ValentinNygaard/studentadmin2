@@ -32,4 +32,9 @@ public class Course {
     public void setCourse_title(String course_title) {
         this.course_title = course_title;
     }
+
+    public boolean equals(Course obj) {
+        return (this.course_id == obj.course_id);
+    }
+
 }

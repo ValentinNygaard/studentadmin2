@@ -1,5 +1,6 @@
 package com.example.studentadmin2.Repository;
 
+import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -53,5 +54,24 @@ public class ExamRepoImpl implements IRepo<Exam> {
         String sql ="SELECT * FROM exam WHERE exam_title LIKE ?";
         RowMapper<Exam> rowMapper = new BeanPropertyRowMapper<>(Exam.class);
         return template.query(sql, rowMapper, exam_title);
+    }
+
+
+    public List<Exam> examsWithStudent(int student_id) {
+        String sql = "SELECT exam.exam_id, exam.exam_title FROM exam_student JOIN exam ON exam_student.exam_exam_id = exam.exam_id WHERE  exam_student.student_student_id = ?";
+        RowMapper<Exam> rowMapper = new BeanPropertyRowMapper<>(Exam.class);
+        return template.query(sql, rowMapper, student_id);
+    }
+
+    public boolean studentAddExam(int student_id, int exam_id) {
+        String sql = "INSERT INTO exam_student (student_student_id, exam_exam_id) VALUES(?,?)";
+        template.update(sql, student_id, exam_id);
+        return true;
+    }
+
+    public boolean studentDeleteExam(int student_id, int exam_id) {
+        String sql = "DELETE FROM exam_student WHERE student_student_id = ? AND exam_exam_id = ?;";
+        template.update(sql, student_id, exam_id);
+        return true;
     }
 }

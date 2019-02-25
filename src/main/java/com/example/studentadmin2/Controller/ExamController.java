@@ -1,6 +1,8 @@
 package com.example.studentadmin2.Controller;
 
+import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exam;
+import com.example.studentadmin2.Service.CourseServiceImpl;
 import com.example.studentadmin2.Service.ExamServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +22,12 @@ public class ExamController {
     @Autowired
     ExamServiceImpl examService;
 
+    @Autowired
+    CourseServiceImpl courseService;
+
     private List<Exam> searchResult;
     private List<Exam> examList;
+    private int currentExam;
 
     @GetMapping("/exams")
     public String exams(Model model){
@@ -61,8 +67,25 @@ public class ExamController {
     @GetMapping("/exam-view/{id}")
     public String examView(@PathVariable("id") int id, Model model) {
         Exam exam = examService.findById(id);
+        currentExam = exam.getExam_id();
+        List<Course> coursesWithExam = courseService.coursesWithExam(id);
+        List<Course> coursesWithoutExam = courseService.coursesWithoutExam(id);
         model.addAttribute("exam", exam);
+        model.addAttribute("coursesWithExam", coursesWithExam);
+        model.addAttribute("coursesWithoutExam", coursesWithoutExam);
         return "exams/exam-view";
+    }
+
+    @GetMapping("/exam-addcourse/{id}")
+    public String examAddCourse(@PathVariable("id") int id) {
+        courseService.examAddCourse(currentExam, id);
+        return "redirect:/exam-view/"+currentExam;
+    }
+
+    @GetMapping("/exam-deletecourse/{id}")
+    public String examDeleteCourse(@PathVariable("id") int id) {
+        courseService.examDeleteCourse(currentExam, id);
+        return "redirect:/exam-view/"+currentExam;
     }
 
     @PostMapping("/updateExam")

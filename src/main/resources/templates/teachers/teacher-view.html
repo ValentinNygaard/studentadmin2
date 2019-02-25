@@ -36,7 +36,14 @@
 
             <p>&nbsp</p>
 
+            <div class="box1">
 
+                <h3>Kurser som denne underviser har:</h3>
+
+                <span th:each="course :${coursesWithTeacher}">
+                <a class="link1" th:href="@{'/course-view/' + ${course.course_id}}"><span th:text="${course.course_title}">Name</span></a><br>
+                </span>
+            </div>
 
         </div>
 
@@ -53,6 +60,37 @@
                     <input type="text" name="teacher_name" size="30" th:value="${teacher.teacher_name}"><br>&nbsp<br>
                     <input type="submit" value="Opdater">
                 </form>
+            </div>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Rediger kursus tilknytning</h3>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="box1b">
+
+                            <h4>Tilføj</h4>
+
+                            <span th:each="course :${coursesWithoutTeacher}">
+                            <a class="link1" th:href="@{'/teacher-addcourse/' + ${course.course_id}}"><span th:text="${course.course_title}">Name</span></a><br>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="box1b">
+
+                            <h4>Fjern</h4>
+
+                            <span th:each="course :${coursesWithTeacher}">
+                            <a class="link1" th:href="@{'/teacher-deletecourse/' + ${course.course_id}}"><span th:text="${course.course_title}">Name</span></a><br>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <p>&nbsp</p>

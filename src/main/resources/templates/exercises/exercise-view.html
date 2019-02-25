@@ -36,7 +36,16 @@
 
             <p>&nbsp</p>
 
+            <div class="box1">
 
+                <h3>Kurser som har denne opgave:</h3>
+
+                <span th:each="course :${coursesWithExercise}">
+                <a class="link1" th:href="@{'/course-view/' + ${course.course_id}}"><span th:text="${course.course_title}">Name</span></a><br>
+                </span>
+            </div>
+
+            <p>&nbsp</p>
 
         </div>
 
@@ -53,6 +62,37 @@
                     <input type="text" name="exercise_title" size="30" th:value="${exercise.exercise_title}"><br>&nbsp<br>
                     <input type="submit" value="Opdater">
                 </form>
+            </div>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Rediger kursus tilknytning</h3>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="box1b">
+
+                            <h4>Tilføj</h4>
+
+                            <span th:each="course :${coursesWithoutExercise}">
+                            <a class="link1" th:href="@{'/exercise-addcourse/' + ${course.course_id}}"><span th:text="${course.course_title}">Name</span></a><br>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="box1b">
+
+                            <h4>Fjern</h4>
+
+                            <span th:each="course :${coursesWithExercise}">
+                <a class="link1" th:href="@{'/exercise-deletecourse/' + ${course.course_id}}"><span th:text="${course.course_title}">Name</span></a><br>
+                </span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <p>&nbsp</p>
