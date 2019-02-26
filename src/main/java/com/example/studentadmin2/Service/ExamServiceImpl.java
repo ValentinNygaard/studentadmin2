@@ -71,8 +71,6 @@ public class ExamServiceImpl implements IService<Exam> {
         List<Exam> examlist = new ArrayList<>(findAll());
 
         for (int c = 0; c < examlist.size(); c++) {
-            System.out.println("s id: "+student_id);
-            System.out.println("c id: "+examlist.get(c).getExam_id());
             repoImpl.studentAddExam(student_id, examlist.get(c).getExam_id());
         }
         return true;

@@ -41,7 +41,6 @@ public class StudentController {
     @PostMapping("/createStudent")
     public String createStudent(@ModelAttribute Student student){
         studentService.create(student);
-        System.out.println(studentService.lastId());
         currentStudent = studentService.lastId();
         courseService.autoCoursesForStudent(currentStudent);
         examService.autoExamsForStudent(currentStudent);
