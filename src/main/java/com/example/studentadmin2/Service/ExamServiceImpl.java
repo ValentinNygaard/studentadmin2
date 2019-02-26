@@ -1,5 +1,6 @@
 package com.example.studentadmin2.Service;
 
+import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exam;
 import com.example.studentadmin2.Model.Exercise;
 import com.example.studentadmin2.Repository.ExamRepoImpl;
@@ -64,5 +65,18 @@ public class ExamServiceImpl implements IService<Exam> {
     }
 
     public List<Exam> examsWithCourse(int course_id) { return repoImpl.examsWithCourse(course_id); }
+
+    public boolean autoExamsForStudent(int student_id) {
+
+        List<Exam> examlist = new ArrayList<>(findAll());
+
+        for (int c = 0; c < examlist.size(); c++) {
+            System.out.println("s id: "+student_id);
+            System.out.println("c id: "+examlist.get(c).getExam_id());
+            repoImpl.studentAddExam(student_id, examlist.get(c).getExam_id());
+        }
+        return true;
+    }
+
 
 }

@@ -72,4 +72,10 @@ public class StudentRepoImpl implements IRepo<Student> {
         return template.query(sql, rowMapper, course_id);
     }
 
+    public int lastId() {
+        String sql ="SELECT LAST_INSERT_ID()";
+        Integer id = (template.queryForObject(sql, Integer.class));
+        return id.intValue();
+    }
+
 }

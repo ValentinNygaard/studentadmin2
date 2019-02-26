@@ -129,4 +129,16 @@ public class CourseServiceImpl implements IService<Course> {
         return listA;
     }
 
+    public boolean autoCoursesForStudent(int student_id) {
+
+        List<Course> courselist = new ArrayList<>(findAll());
+
+        for (int c = 0; c < courselist.size(); c++) {
+            System.out.println("s id: "+student_id);
+            System.out.println("c id: "+courselist.get(c).getCourse_id());
+            repoImpl.studentAddCourse(student_id, courselist.get(c).getCourse_id());
+        }
+        return true;
+    }
+
 }

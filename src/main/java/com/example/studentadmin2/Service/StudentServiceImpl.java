@@ -41,4 +41,6 @@ public class StudentServiceImpl implements IService<Student> {
 
     public List<Student> studentsWithCourse(int course_id) { return repoImpl.studentsWithCourse(course_id); }
 
+    public int lastId () { return repoImpl.lastId(); }
+
 }
