@@ -1,8 +1,6 @@
 package com.example.studentadmin2.Repository;
 
-import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exam;
-import com.example.studentadmin2.Model.Exercise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -57,7 +55,6 @@ public class ExamRepoImpl implements IRepo<Exam> {
         return template.query(sql, rowMapper, exam_title);
     }
 
-
     public List<Exam> examsWithStudent(int student_id) {
         String sql = "SELECT exam.exam_id, exam.exam_title FROM exam_student JOIN exam ON exam_student.exam_exam_id = exam.exam_id WHERE  exam_student.student_student_id = ?;";
         RowMapper<Exam> rowMapper = new BeanPropertyRowMapper<>(Exam.class);
@@ -75,6 +72,8 @@ public class ExamRepoImpl implements IRepo<Exam> {
         template.update(sql, student_id, exam_id);
         return true;
     }
+
+    //adding of all exams to students - missing check of relations exists - should only be used with just created students
 
     public List<Exam> examsWithCourse(int course_id) {
         String sql ="SELECT exam.exam_id, exam.exam_title FROM course_exam JOIN exam ON course_exam.exam_exam_id = exam.exam_id WHERE course_exam.course_course_id = ?;";

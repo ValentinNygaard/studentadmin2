@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-
 @Controller
 public class ExamController {
-
 
     @Autowired
     ExamServiceImpl examService;
@@ -31,7 +29,6 @@ public class ExamController {
     TeacherServiceImpl teacherService;
     @Autowired
     StudentServiceImpl studentService;
-
 
     private List<Exam> searchResult;
     private List<Exam> examList;

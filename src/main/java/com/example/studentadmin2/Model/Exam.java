@@ -42,4 +42,5 @@ public class Exam {
     public void setExam_type(String exam_type) {
         this.exam_type = exam_type;
     }
+
 }

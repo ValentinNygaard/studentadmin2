@@ -18,10 +18,8 @@ import java.util.List;
 @Controller
 public class ExerciseController {
 
-
     @Autowired
     ExerciseServiceImpl exerciseService;
-
     @Autowired
     CourseServiceImpl courseService;
 

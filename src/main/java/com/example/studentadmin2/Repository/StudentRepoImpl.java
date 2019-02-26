@@ -1,13 +1,10 @@
 package com.example.studentadmin2.Repository;
 
-import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -71,6 +68,8 @@ public class StudentRepoImpl implements IRepo<Student> {
         RowMapper<Student> rowMapper = new BeanPropertyRowMapper<>(Student.class);
         return template.query(sql, rowMapper, course_id);
     }
+
+    //get id for new object added to DB - problem with return value from db insert
 
     public int lastId() {
         String sql ="SELECT LAST_INSERT_ID()";

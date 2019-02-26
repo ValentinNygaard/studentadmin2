@@ -1,10 +1,10 @@
 package com.example.studentadmin2.Service;
 
 import com.example.studentadmin2.Model.Exercise;
-import com.example.studentadmin2.Model.Teacher;
 import com.example.studentadmin2.Repository.ExerciseRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service

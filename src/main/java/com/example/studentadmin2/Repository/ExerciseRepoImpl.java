@@ -1,7 +1,6 @@
 package com.example.studentadmin2.Repository;
 
 import com.example.studentadmin2.Model.Exercise;
-import com.example.studentadmin2.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,8 +1,6 @@
 package com.example.studentadmin2.Service;
 
-import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exam;
-import com.example.studentadmin2.Model.Exercise;
 import com.example.studentadmin2.Repository.ExamRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +39,7 @@ public class ExamServiceImpl implements IService<Exam> {
 
     public List<Exam> searchByName(String exam_title) { return repoImpl.searchByName(exam_title); }
 
+    // Operations on exam_student table
 
     public boolean studentAddExam(int student_id, int exam_id) { return repoImpl.studentAddExam(student_id, exam_id); }
 
@@ -48,7 +47,7 @@ public class ExamServiceImpl implements IService<Exam> {
 
     public List<Exam> examsWithStudent(int student_id) { return repoImpl.examsWithStudent(student_id); }
 
-    public List<Exam> examsWithoutStudent(int student_id) {
+    public List<Exam> examsWithoutStudent(int student_id) { //Could be made generic to avoid repetition of code
 
         List<Exam> listA = new ArrayList<>(findAll());
         List<Exam> listB = new ArrayList<>(examsWithStudent(student_id));
@@ -66,6 +65,8 @@ public class ExamServiceImpl implements IService<Exam> {
 
     public List<Exam> examsWithCourse(int course_id) { return repoImpl.examsWithCourse(course_id); }
 
+    //adding of all exams to students - missing check of relations exists - should only be used with just created students
+
     public boolean autoExamsForStudent(int student_id) {
 
         List<Exam> examlist = new ArrayList<>(findAll());
@@ -75,6 +76,5 @@ public class ExamServiceImpl implements IService<Exam> {
         }
         return true;
     }
-
 
 }

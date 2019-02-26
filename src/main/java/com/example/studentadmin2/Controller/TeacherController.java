@@ -14,14 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-
 @Controller
 public class TeacherController {
 
-
     @Autowired
     TeacherServiceImpl teacherService;
-
     @Autowired
     CourseServiceImpl courseService;
 
@@ -87,7 +84,6 @@ public class TeacherController {
         courseService.teacherDeleteCourse(currentTeacher, id);
         return "redirect:/teacher-view/"+currentTeacher;
     }
-
 
     @PostMapping("/updateTeacher")
     public String updateTeacher(@ModelAttribute Teacher teacher){

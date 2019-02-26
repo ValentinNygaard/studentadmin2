@@ -13,17 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @Controller
 public class StudentController {
 
-
     @Autowired
     StudentServiceImpl studentService;
-
     @Autowired
     CourseServiceImpl courseService;
-
     @Autowired
     ExamServiceImpl examService;
 

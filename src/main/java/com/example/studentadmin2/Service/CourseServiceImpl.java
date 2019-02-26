@@ -5,7 +5,8 @@ import com.example.studentadmin2.Repository.CourseRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CourseServiceImpl implements IService<Course> {
@@ -38,11 +39,11 @@ public class CourseServiceImpl implements IService<Course> {
 
     public List<Course> searchByName(String course_title) { return repoImpl.searchByName(course_title); }
 
-
+    // Operations on course_exercise table
 
     public List<Course> coursesWithExercise(int exercise_id) { return repoImpl.coursesWithExercise(exercise_id); }
 
-    public List<Course> coursesWithoutExercise(int exercise_id) {
+    public List<Course> coursesWithoutExercise(int exercise_id) { //Could be made generic to avoid repetition of code
 
         List<Course> listA = new ArrayList<>(findAll());
         List<Course> listB = new ArrayList<>(coursesWithExercise(exercise_id));
@@ -62,6 +63,7 @@ public class CourseServiceImpl implements IService<Course> {
 
     public boolean exerciseDeleteCourse(int exercise_id, int course_id) { return repoImpl.exerciseDeleteCourse(exercise_id, course_id); }
 
+    // Operations on course_exam table
 
     public boolean examAddCourse(int exam_id, int course_id) { return repoImpl.examAddCourse(exam_id, course_id); }
 
@@ -69,7 +71,7 @@ public class CourseServiceImpl implements IService<Course> {
 
     public List<Course> coursesWithExam(int exam_id) { return repoImpl.coursesWithExam(exam_id); }
 
-    public List<Course> coursesWithoutExam(int exam_id) {
+    public List<Course> coursesWithoutExam(int exam_id) { //Could be made generic to avoid repetition of code
 
         List<Course> listA = new ArrayList<>(findAll());
         List<Course> listB = new ArrayList<>(coursesWithExam(exam_id));
@@ -85,13 +87,15 @@ public class CourseServiceImpl implements IService<Course> {
         return listA;
     }
 
+    // Operations on course_teacher table
+
     public boolean teacherAddCourse(int teacher_id, int course_id) { return repoImpl.teacherAddCourse(teacher_id, course_id); }
 
     public boolean teacherDeleteCourse(int exercise_id, int course_id) { return repoImpl.teacherDeleteCourse(exercise_id, course_id); }
 
     public List<Course> coursesWithTeacher(int teacher_id) { return repoImpl.coursesWithTeacher(teacher_id); }
 
-    public List<Course> coursesWithoutTeacher(int teacher_id) {
+    public List<Course> coursesWithoutTeacher(int teacher_id) { //Could be made generic to avoid repetition of code
 
         List<Course> listA = new ArrayList<>(findAll());
         List<Course> listB = new ArrayList<>(coursesWithTeacher(teacher_id));
@@ -107,13 +111,15 @@ public class CourseServiceImpl implements IService<Course> {
         return listA;
     }
 
+    // Operations on course_student table
+
     public boolean studentAddCourse(int student_id, int course_id) { return repoImpl.studentAddCourse(student_id, course_id); }
 
     public boolean studentDeleteCourse(int student_id, int course_id) { return repoImpl.studentDeleteCourse(student_id, course_id); }
 
     public List<Course> coursesWithStudent(int student_id) { return repoImpl.coursesWithStudent(student_id); }
 
-    public List<Course> coursesWithoutStudent(int student_id) {
+    public List<Course> coursesWithoutStudent(int student_id) { //Could be made generic to avoid repetition of code
 
         List<Course> listA = new ArrayList<>(findAll());
         List<Course> listB = new ArrayList<>(coursesWithStudent(student_id));
@@ -128,6 +134,8 @@ public class CourseServiceImpl implements IService<Course> {
         }
         return listA;
     }
+
+    //adding of all courses to students - missing check of relations exists - should only be used with just created students
 
     public boolean autoCoursesForStudent(int student_id) {
 

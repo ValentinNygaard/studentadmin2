@@ -1,6 +1,5 @@
 package com.example.studentadmin2.Repository;
 
-import com.example.studentadmin2.Model.Student;
 import com.example.studentadmin2.Model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -67,4 +66,5 @@ public class TeacherRepoImpl implements IRepo<Teacher> {
         RowMapper<Teacher> rowMapper = new BeanPropertyRowMapper<>(Teacher.class);
         return template.query(sql, rowMapper, course_id);
     }
+
 }

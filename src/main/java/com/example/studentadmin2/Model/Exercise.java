@@ -32,4 +32,5 @@ public class Exercise {
     public void setExercise_title(String exercise_title) {
         this.exercise_title = exercise_title;
     }
+
 }
