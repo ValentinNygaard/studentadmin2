@@ -38,7 +38,7 @@
 
             <div class="box1">
 
-                <h3>Kurser som denne studerende har:</h3>
+                <h3>Kurser tilmeldt:</h3>
 
                 <span th:each="course :${coursesWithStudent}">
                 <a class="link1" th:href="@{'/course-view/' + ${course.course_id}}"><span th:text="${course.course_title}">Name</span></a><br>
@@ -49,7 +49,7 @@
 
             <div class="box1">
 
-                <h3>Eksamener som denne studerende har:</h3>
+                <h3>Eksamener tilmeldt:</h3>
 
                 <span th:each="exam :${examsWithStudent}">
                 <a class="link1" th:href="@{'/exam-view/' + ${exam.exam_id}}"><span th:text="${exam.exam_title}">Name</span></a><br>

@@ -1,7 +1,7 @@
 package com.example.studentadmin2.Service;
 
-import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exam;
+import com.example.studentadmin2.Model.Exercise;
 import com.example.studentadmin2.Repository.ExamRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,4 +62,7 @@ public class ExamServiceImpl implements IService<Exam> {
         }
         return listA;
     }
+
+    public List<Exam> examsWithCourse(int course_id) { return repoImpl.examsWithCourse(course_id); }
+
 }

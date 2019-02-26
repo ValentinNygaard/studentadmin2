@@ -1,7 +1,7 @@
 package com.example.studentadmin2.Controller;
 
-import com.example.studentadmin2.Model.Course;
-import com.example.studentadmin2.Service.CourseServiceImpl;
+import com.example.studentadmin2.Model.*;
+import com.example.studentadmin2.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +16,16 @@ import java.util.List;
 @Controller
 public class CourseController {
 
-
     @Autowired
     CourseServiceImpl courseService;
+    @Autowired
+    TeacherServiceImpl teacherService;
+    @Autowired
+    ExerciseServiceImpl exerciseService;
+    @Autowired
+    StudentServiceImpl studentService;
+    @Autowired
+    ExamServiceImpl examService;
 
     private List<Course> searchResult;
     private List<Course> courseList;
@@ -61,7 +68,15 @@ public class CourseController {
     @GetMapping("/course-view/{id}")
     public String courseView(@PathVariable("id") int id, Model model) {
         Course course = courseService.findById(id);
+        List<Teacher> teachersWithCourse = teacherService.teachersWithCourse(id);
+        List<Exam> examsWithCourse = examService.examsWithCourse(id);
+        List<Exercise> exercisesWithCourse = exerciseService.exercisesWithCourse(id);
+        List<Student> studentsWithCourse = studentService.studentsWithCourse(id);
         model.addAttribute("course", course);
+        model.addAttribute("teachersWithCourse", teachersWithCourse);
+        model.addAttribute("examsWithCourse", examsWithCourse);
+        model.addAttribute("exercisesWithCourse", exercisesWithCourse);
+        model.addAttribute("studentsWithCourse", studentsWithCourse);
         return "courses/course-view";
     }
 

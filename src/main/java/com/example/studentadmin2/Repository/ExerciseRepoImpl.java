@@ -1,6 +1,7 @@
 package com.example.studentadmin2.Repository;
 
 import com.example.studentadmin2.Model.Exercise;
+import com.example.studentadmin2.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -53,6 +54,12 @@ public class ExerciseRepoImpl implements IRepo<Exercise> {
         String sql ="SELECT * FROM exercise WHERE exercise_title LIKE ?";
         RowMapper<Exercise> rowMapper = new BeanPropertyRowMapper<>(Exercise.class);
         return template.query(sql, rowMapper, exercise_title);
+    }
+
+    public List<Exercise> exercisesWithCourse(int course_id) {
+        String sql ="SELECT exercise.exercise_id, exercise.exercise_title FROM course_exercise JOIN exercise ON course_exercise.exercise_exercise_id = exercise.exercise_id WHERE course_exercise.course_course_id = ?;";
+        RowMapper<Exercise> rowMapper = new BeanPropertyRowMapper<>(Exercise.class);
+        return template.query(sql, rowMapper, course_id);
     }
 
 }

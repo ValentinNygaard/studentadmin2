@@ -2,6 +2,7 @@ package com.example.studentadmin2.Repository;
 
 import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exam;
+import com.example.studentadmin2.Model.Exercise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -58,7 +59,7 @@ public class ExamRepoImpl implements IRepo<Exam> {
 
 
     public List<Exam> examsWithStudent(int student_id) {
-        String sql = "SELECT exam.exam_id, exam.exam_title FROM exam_student JOIN exam ON exam_student.exam_exam_id = exam.exam_id WHERE  exam_student.student_student_id = ?";
+        String sql = "SELECT exam.exam_id, exam.exam_title FROM exam_student JOIN exam ON exam_student.exam_exam_id = exam.exam_id WHERE  exam_student.student_student_id = ? ORDER BY exam_student.exam_student_id DESC;";
         RowMapper<Exam> rowMapper = new BeanPropertyRowMapper<>(Exam.class);
         return template.query(sql, rowMapper, student_id);
     }
@@ -74,4 +75,11 @@ public class ExamRepoImpl implements IRepo<Exam> {
         template.update(sql, student_id, exam_id);
         return true;
     }
+
+    public List<Exam> examsWithCourse(int course_id) {
+        String sql ="SELECT exam.exam_id, exam.exam_title FROM course_exam JOIN exam ON course_exam.exam_exam_id = exam.exam_id WHERE course_exam.course_course_id = ?;";
+        RowMapper<Exam> rowMapper = new BeanPropertyRowMapper<>(Exam.class);
+        return template.query(sql, rowMapper, course_id);
+    }
+
 }

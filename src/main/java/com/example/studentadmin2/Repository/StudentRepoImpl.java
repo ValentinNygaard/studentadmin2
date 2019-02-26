@@ -1,5 +1,6 @@
 package com.example.studentadmin2.Repository;
 
+import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -57,6 +58,18 @@ public class StudentRepoImpl implements IRepo<Student> {
         String sql ="SELECT * FROM student WHERE student_name LIKE ?";
         RowMapper<Student> rowMapper = new BeanPropertyRowMapper<>(Student.class);
         return template.query(sql, rowMapper, student_name);
+    }
+
+    public List<Student> studentsWithExam(int exam_id) {
+        String sql ="SELECT student.student_id, student.student_name FROM exam_student JOIN student ON exam_student.student_student_id = student.student_id WHERE  exam_student.exam_exam_id = ? ORDER BY exam_student.exam_student_id DESC;";
+        RowMapper<Student> rowMapper = new BeanPropertyRowMapper<>(Student.class);
+        return template.query(sql, rowMapper, exam_id);
+    }
+
+    public List<Student> studentsWithCourse(int course_id) {
+        String sql ="SELECT student.student_id, student.student_name FROM course_student JOIN student ON course_student.student_student_id = student.student_id WHERE  course_student.course_course_id = ? ORDER BY student.student_name;";
+        RowMapper<Student> rowMapper = new BeanPropertyRowMapper<>(Student.class);
+        return template.query(sql, rowMapper, course_id);
     }
 
 }

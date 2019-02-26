@@ -37,4 +37,8 @@ public class StudentServiceImpl implements IService<Student> {
 
     public List<Student> searchByName(String student_name) { return repoImpl.searchByName(student_name); }
 
+    public List<Student> studentsWithExam(int exam_id) { return repoImpl.studentsWithExam(exam_id); }
+
+    public List<Student> studentsWithCourse(int course_id) { return repoImpl.studentsWithCourse(course_id); }
+
 }

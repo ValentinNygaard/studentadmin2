@@ -36,7 +36,49 @@
 
             <p>&nbsp</p>
 
+            <div class="box1">
 
+                <h3>Underviser(e) på dette kursus:</h3>
+
+                <span th:each="teacher :${teachersWithCourse}">
+                <a class="link1" th:href="@{'/teacher-view/' + ${teacher.teacher_id}}"><span th:text="${teacher.teacher_name}">Name</span></a><br>
+                </span>
+            </div>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Eksamener tilknyttet dette kursus:</h3>
+
+                <span th:each="exam :${examsWithCourse}">
+                <a class="link1" th:href="@{'/exam-view/' + ${exam.exam_id}}"><span th:text="${exam.exam_title}">Name</span></a><br>
+                </span>
+            </div>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Opgaver tilknyttet dette kursus:</h3>
+
+                <span th:each="exercise :${exercisesWithCourse}">
+                <a class="link1" th:href="@{'/exercise-view/' + ${exercise.exercise_id}}"><span th:text="${exercise.exercise_title}">Name</span></a><br>
+                </span>
+            </div>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Studerende tilmeldt dette kursus:</h3>
+
+                <span th:each="student :${studentsWithCourse}">
+                <a class="link1" th:href="@{'/student-view/' + ${student.student_id}}"><span th:text="${student.student_name}">Name</span></a><br>
+                </span>
+            </div>
+
+            <p>&nbsp</p>
 
         </div>
 

@@ -1,6 +1,7 @@
 package com.example.studentadmin2.Service;
 
 import com.example.studentadmin2.Model.Exercise;
+import com.example.studentadmin2.Model.Teacher;
 import com.example.studentadmin2.Repository.ExerciseRepoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,7 @@ public class ExerciseServiceImpl implements IService<Exercise> {
     public boolean delete(int id) { return repoImpl.delete(id); }
 
     public List<Exercise> searchByName(String exercise_title) { return repoImpl.searchByName(exercise_title); }
+
+    public List<Exercise> exercisesWithCourse(int course_id) { return repoImpl.exercisesWithCourse(course_id); }
 
 }

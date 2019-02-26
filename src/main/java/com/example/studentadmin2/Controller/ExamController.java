@@ -2,8 +2,12 @@ package com.example.studentadmin2.Controller;
 
 import com.example.studentadmin2.Model.Course;
 import com.example.studentadmin2.Model.Exam;
+import com.example.studentadmin2.Model.Student;
+import com.example.studentadmin2.Model.Teacher;
 import com.example.studentadmin2.Service.CourseServiceImpl;
 import com.example.studentadmin2.Service.ExamServiceImpl;
+import com.example.studentadmin2.Service.StudentServiceImpl;
+import com.example.studentadmin2.Service.TeacherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +25,13 @@ public class ExamController {
 
     @Autowired
     ExamServiceImpl examService;
-
     @Autowired
     CourseServiceImpl courseService;
+    @Autowired
+    TeacherServiceImpl teacherService;
+    @Autowired
+    StudentServiceImpl studentService;
+
 
     private List<Exam> searchResult;
     private List<Exam> examList;
@@ -69,10 +77,14 @@ public class ExamController {
         Exam exam = examService.findById(id);
         currentExam = exam.getExam_id();
         List<Course> coursesWithExam = courseService.coursesWithExam(id);
+        List<Teacher> teachersWithExam = teacherService.teachersWithExam(id);
+        List<Student> studentsWithExam = studentService.studentsWithExam(id);
         List<Course> coursesWithoutExam = courseService.coursesWithoutExam(id);
         model.addAttribute("exam", exam);
         model.addAttribute("coursesWithExam", coursesWithExam);
         model.addAttribute("coursesWithoutExam", coursesWithoutExam);
+        model.addAttribute("teachersWithExam", teachersWithExam);
+        model.addAttribute("studentsWithExam", studentsWithExam);
         return "exams/exam-view";
     }
 

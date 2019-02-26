@@ -46,7 +46,33 @@
                 </span>
             </div>
 
+            <p>&nbsp</p>
 
+            <div class="box1">
+
+                <h3>Eksaminatorer ved denne eksamen:</h3>
+
+                <h5>(Undervisere i de tilknyttede fag)</h5>
+
+                <span th:each="teacher :${teachersWithExam}">
+                <a class="link1" th:href="@{'/teacher-view/' + ${teacher.teacher_id}}"><span th:text="${teacher.teacher_name}">Name</span></a><br>
+                </span>
+            </div>
+
+            <p>&nbsp</p>
+
+            <div class="box1">
+
+                <h3>Studerende tilmeldt denne eksamen:</h3>
+
+                <h5>(Eksamensrækkefølge)</h5>
+
+                <span th:each="student :${studentsWithExam}">
+                <a class="link1" th:href="@{'/student-view/' + ${student.student_id}}"><span th:text="${student.student_name}">Name</span></a><br>
+                </span>
+            </div>
+
+            <p>&nbsp</p>
 
         </div>
 
@@ -109,6 +135,8 @@
                     <input type="submit" value="Slet">
                 </form>
             </div>
+
+            <p>&nbsp</p>
 
         </div>
     </div>
