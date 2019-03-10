@@ -17,7 +17,7 @@ public class StudentRepoImpl implements IRepo<Student> {
 
     @Override
     public List<Student> findAll() {
-        String sql = "SELECT * FROM student";
+        String sql = "SELECT * FROM student ORDER BY student.student_name;";
         RowMapper<Student> rowMapper = new BeanPropertyRowMapper<>(Student.class);
         return template.query(sql, rowMapper);
     }
@@ -54,7 +54,8 @@ public class StudentRepoImpl implements IRepo<Student> {
     public List<Student> searchByName(String student_name) {
         String sql ="SELECT * FROM student WHERE student_name LIKE ?";
         RowMapper<Student> rowMapper = new BeanPropertyRowMapper<>(Student.class);
-        return template.query(sql, rowMapper, student_name);
+        String searchPartText = "%" + student_name + "%";
+        return template.query(sql, rowMapper, searchPartText);
     }
 
     public List<Student> studentsWithExam(int exam_id) {

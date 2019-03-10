@@ -52,7 +52,8 @@ public class CourseRepoImpl implements IRepo<Course> {
     public List<Course> searchByName(String course_title) {
         String sql ="SELECT * FROM course WHERE course_title LIKE ?";
         RowMapper<Course> rowMapper = new BeanPropertyRowMapper<>(Course.class);
-        return template.query(sql, rowMapper, course_title);
+        String searchPartText = "%" + course_title + "%";
+        return template.query(sql, rowMapper, searchPartText);
     }
 
     public List<Course> coursesWithExercise(int exercise_id) {

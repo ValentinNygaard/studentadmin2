@@ -12,8 +12,12 @@ import java.util.List;
 @Repository
 public class ExerciseRepoImpl implements IRepo<Exercise> {
 
-    @Autowired
     JdbcTemplate template;
+
+    @Autowired
+    public ExerciseRepoImpl(JdbcTemplate template ) {
+        this.template = template;
+    }
 
     @Override
     public List<Exercise> findAll() {
@@ -52,7 +56,8 @@ public class ExerciseRepoImpl implements IRepo<Exercise> {
     public List<Exercise> searchByName(String exercise_title) {
         String sql ="SELECT * FROM exercise WHERE exercise_title LIKE ?";
         RowMapper<Exercise> rowMapper = new BeanPropertyRowMapper<>(Exercise.class);
-        return template.query(sql, rowMapper, exercise_title);
+        String searchPartText = "%" + exercise_title + "%";
+        return template.query(sql, rowMapper, searchPartText);
     }
 
     public List<Exercise> exercisesWithCourse(int course_id) {

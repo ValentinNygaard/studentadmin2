@@ -52,7 +52,8 @@ public class TeacherRepoImpl implements IRepo<Teacher> {
     public List<Teacher> searchByName(String teacher_name) {
         String sql ="SELECT * FROM teacher WHERE teacher_name LIKE ?";
         RowMapper<Teacher> rowMapper = new BeanPropertyRowMapper<>(Teacher.class);
-        return template.query(sql, rowMapper, teacher_name);
+        String searchPartText = "%" + teacher_name + "%";
+        return template.query(sql, rowMapper, searchPartText);
     }
 
     public List<Teacher> teachersWithExam(int exam_id) {
